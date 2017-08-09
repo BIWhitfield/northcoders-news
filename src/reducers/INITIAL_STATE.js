@@ -1,5 +1,7 @@
 const INITIAL_STATE = {
   articles: [],
+  topicArticles: [],
+  article: {},
   topics: [],
   selectedTopic: null,
   loading: false,
