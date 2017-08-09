@@ -11,7 +11,7 @@ const ArticleCard = props => (
       </div>
       <div className="media-content">
         <div className="content">
-          <NavLink to={`/articles/${props.id}`} className="title is-3">{props.title}</NavLink>
+          <NavLink to={`/article/${props.id}`} className="title is-3">{props.title}</NavLink>
         </div>
       </div>
     </article>
