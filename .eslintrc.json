@@ -1,0 +1,24 @@
+{
+    "extends": "airbnb",
+    "rules": {
+        "no-console": "off",
+        "max-len": 0,
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [
+                    ".js",
+                    ".jsx"
+                ]
+            }
+        ],
+        "react/jsx-no-bind": [
+            0,
+            {
+                "ignoreRefs": true,
+                "allowArrowFunctions": true,
+                "allowBind": true
+            }
+        ]
+    }
+}
