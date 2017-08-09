@@ -14,8 +14,7 @@ const VoteButtons = props => (
 );
 
 VoteButtons.propTypes = {
-  votes: PropTypes.number.isRequired,
-  voteHandler: PropTypes.func.isRequired,
+  votes: PropTypes.number,
 };
 
 export default VoteButtons;
