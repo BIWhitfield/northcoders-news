@@ -7,6 +7,7 @@ import 'bulma/css/bulma.css';
 import Home from './Home';
 import TopicsHeader from './TopicsHeader';
 import TopicPage from './TopicPage';
+import Article from './Article';
 
 const history = createBrowserHistory();
 
@@ -21,6 +22,7 @@ const App = () => (
       </div>
       <Route exact path="/" component={Home} />
       <Route path="/articles/:topic_slug" component={TopicPage} />
+      <Route path="/article/:article_id" component={Article} />
     </div>
   </Router>
     );
