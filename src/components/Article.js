@@ -5,17 +5,39 @@ import * as actions from '../actions/actions';
 
 import VoteButtons from './VoteButtons';
 import PostCommentForm from './PostCommentForm';
+import ArticleComments from './ArticleComments';
 
 class Article extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      commentTextInput: '',
+    };
+
+    this.inputHandler = this.inputHandler.bind(this);
+    this.submitHandler = this.submitHandler.bind(this);
+  }
 
   componentDidMount() {
     this.props.fetchArticle(this.props.match.params.article_id);
   }
 
+  inputHandler(e) {
+    console.log('HELLO', e.target.value);
+    this.setState({
+      commentTextInput: e.target.value,
+    });
+  }
+
+  submitHandler(e) {
+    e.preventDefault();
+    this.props.addComment(this.props.match.params.article_id, this.state.commentTextInput);
+    this.setState({ commentTextInput: '' });
+  }
+
   render() {
     return (
       <section className="container box">
-        {console.log(this.props)}
         <div className="columns">
           <div className="column is-2">
             <VoteButtons votes={this.props.article.votes} />
@@ -27,7 +49,12 @@ class Article extends React.Component {
               <p className="">{this.props.article.body}</p>
             </section>
             <section className="box">
-              <PostCommentForm />
+              <PostCommentForm
+                inputHandler={this.inputHandler}
+                submitHandler={this.submitHandler}
+                input={this.state.commentTextInput}
+              />
+              <ArticleComments id={this.props.match.params.article_id} />
             </section>
           </div>
         </div>
@@ -36,10 +63,14 @@ class Article extends React.Component {
   }
 }
 
+
 function mapDispatchToProps(dispatch) {
   return {
     fetchArticle: (id) => {
       dispatch(actions.fetchArticle(id));
+    },
+    addComment: (articleId, comment) => {
+      dispatch(actions.addComment(articleId, comment));
     },
   };
 }
@@ -54,7 +85,7 @@ function mapStateToProps(state) {
 Article.propTypes = {
   fetchArticle: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired,
-  votes: PropTypes.number.isRequired,
+  match: PropTypes.object.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Article);
