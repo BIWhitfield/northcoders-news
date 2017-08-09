@@ -60,7 +60,7 @@ function reducer(prevState = INITIAL_STATE, action) {
 
   if (action.type === types.FETCH_TOPIC_ARTICLES_SUCCESS) {
     const newState = Object.assign({}, prevState);
-    newState.articles = action.data;
+    newState.topicArticles = action.data;
     newState.loading = false;
     return newState;
   }
@@ -68,7 +68,31 @@ function reducer(prevState = INITIAL_STATE, action) {
   if (action.type === types.FETCH_TOPIC_ARTICLES_ERROR) {
     const newState = Object.assign({}, prevState);
     newState.error = action.data;
-    newState.articles = [];
+    newState.topicArticles = [];
+    newState.loading = false;
+    return newState;
+  }
+
+
+  // FETCH ARTICLE
+  if (action.type === types.FETCH_ARTICLE_REQUEST) {
+    const newState = Object.assign({}, prevState);
+    newState.loading = true;
+    return newState;
+  }
+
+  if (action.type === types.FETCH_ARTICLE_SUCCESS) {
+   // console.log(action.data);
+    const newState = Object.assign({}, prevState);
+    newState.article = action.data;
+    newState.loading = false;
+    return newState;
+  }
+
+  if (action.type === types.FETCH_ARTICLE_ERROR) {
+    const newState = Object.assign({}, prevState);
+    newState.error = action.data;
+    newState.article = [];
     newState.loading = false;
     return newState;
   }
