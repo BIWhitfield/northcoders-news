@@ -53,6 +53,7 @@ export function fetchTopicArticles(topicId) {
   };
 }
 
+
 // FETCH ARTICLE
 export function fetchArticle(articleId) {
   return (dispatch) => {
@@ -66,6 +67,7 @@ export function fetchArticle(articleId) {
       });
   };
 }
+
 
 // FETCH ARTICLE COMMENTS
 export function fetchArticleComments(articleId) {
@@ -99,7 +101,6 @@ export function addComment(articleId, comment) {
 
 // VOTE ARTICLE
 export function articleVote(articleId, vote) {
-  console.log('HAHAHAHAHA', articleId, vote);
   return (dispatch) => {
     dispatch(articleVoteAction.articleVoteRequest());
     axios
