@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+import '../css/ArticleCard.css';
 
 const ArticleCard = props => (
   <div className="box">
     <article className="media">
       <span className="column is-narrow rows">
+        <div>
+          <img src={props.avatarUrl} alt="User Avatar" />
+        </div>
         <a className="is-danger is-small" onClick={props.voteOnArticles.bind(null, props.id, 'up')} >
           <i className="fa fa-arrow-up row" />
         </a>
