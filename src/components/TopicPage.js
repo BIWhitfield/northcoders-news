@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as actions from '../actions/actions';
-import ArticleCard from './ArticleCard';
+import TopicArticle from './TopicArticle';
 
 class TopicPage extends React.Component {
 
@@ -21,7 +21,15 @@ class TopicPage extends React.Component {
       <section className="container box">
         <div>{
         this.props.TopicArticles.sort((a, b) => b.votes - a.votes)
-          .map(article => <ArticleCard id={article._id} title={article.title} votes={article.votes} key={article._id} />)}</div>
+          .map(article =>
+            (<TopicArticle
+              article={article}
+              id={article._id}
+              title={article.title}
+              votes={article.votes}
+              key={article._id}
+              voteOnTopicArticles={this.props.voteOnTopicArticles}
+            />))}</div>
       </section>
     );
   }
@@ -32,6 +40,9 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchTopicArticles: (id) => {
       dispatch(actions.fetchTopicArticles(id));
+    },
+    voteOnTopicArticles: (articleId, vote) => {
+      dispatch(actions.voteOnTopicArticles(articleId, vote));
     },
   };
 }
