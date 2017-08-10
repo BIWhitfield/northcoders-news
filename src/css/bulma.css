@@ -178,7 +178,7 @@ hr {
 }
 
 img {
-  max-width: 100%;
+  max-width: 75px;
 }
 
 input[type="checkbox"],
@@ -3459,11 +3459,11 @@ a.box:active {
 .media {
   -webkit-box-align: start;
       -ms-flex-align: start;
-          align-items: flex-start;
+          align-items: center;
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex;
-  text-align: left;
+  display: inline-flex;
+  text-align: center;
 }
 
 .media .content:not(:last-child) {

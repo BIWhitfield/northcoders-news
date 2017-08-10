@@ -10,6 +10,7 @@ import * as articleVoteAction from './articleVote';
 import * as voteOnComment from './voteComment';
 import * as articlesVote from './articlesVote';
 import * as topicArticlesVote from './topicArticlesVote';
+import * as fetchAllUsers from './fetchAllUsers';
 
 
 // FETCH ALL ARTICLES
@@ -22,6 +23,21 @@ export function fetchArticles() {
       })
       .catch((err) => {
         dispatch(fetchAllArticles.fetchArticlesError(err));
+      });
+  };
+}
+
+
+// FETCH ALL USERS
+export function fetchUsers() {
+  return (dispatch) => {
+    dispatch(fetchAllUsers.fetchUsersRequest());
+    axios.get(`${ROOT}/users`)
+      .then((res) => {
+        dispatch(fetchAllUsers.fetchUsersSuccess(res.data.users));
+      })
+      .catch((err) => {
+        dispatch(fetchAllUsers.fetchUsersError(err));
       });
   };
 }

@@ -8,6 +8,7 @@ class Home extends React.Component {
 
   componentDidMount() {
     this.props.fetchArticles();
+    this.props.fetchUsers()
   }
 
   render() {
@@ -22,6 +23,7 @@ class Home extends React.Component {
                 title={article.title}
                 votes={article.votes}
                 key={article._id}
+                avatarUrl={this.props.users[article.created_by].avatar_url}
                 voteOnArticles={this.props.voteOnArticles}
               />))}</div>
       </section>
@@ -38,6 +40,9 @@ function mapDispatchToProps(dispatch) {
     voteOnArticles: (articleId, vote) => {
       dispatch(actions.voteOnArticles(articleId, vote))
     },
+    fetchUsers: () => {
+      dispatch(actions.fetchUsers());
+    },
   };
 }
 
@@ -45,6 +50,7 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   return {
     articles: state.articles,
+    users: state.users,
   };
 }
 
@@ -52,6 +58,7 @@ Home.propTypes = {
   fetchArticles: PropTypes.func.isRequired,
   articles: PropTypes.array.isRequired,
   voteOnArticles: PropTypes.func.isRequired,
+  users: PropTypes.object.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

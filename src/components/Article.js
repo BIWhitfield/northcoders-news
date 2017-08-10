@@ -8,6 +8,8 @@ import VoteButtons from './VoteButtons';
 import PostCommentForm from './PostCommentForm';
 import Comment from './Comment';
 
+import '../css/Article.css';
+
 class Article extends React.Component {
   constructor(props) {
     super(props);
@@ -50,19 +52,22 @@ class Article extends React.Component {
               <h6 className="subtitle">Created by: {this.props.article.created_by}</h6>
               <p className="">{this.props.article.body}</p>
             </section>
+
             <section className="box">
               <PostCommentForm
                 inputHandler={this.inputHandler}
                 submitHandler={this.submitHandler}
                 input={this.state.commentTextInput}
               />
-              <section className="box">
-                <div id="comment">
+
+              <section className="box comment">
+                <div className="comment">
                   {map(this.props.comments, comment => (
                     <Comment
                       comment={comment}
                       key={comment._id}
                       id={comment._id}
+                      avatarUrl={this.props.users[comment.created_by].avatar_url}
                       commentVote={this.props.commentVote}
                     />
                     ))}
@@ -93,7 +98,10 @@ function mapDispatchToProps(dispatch) {
     },
     commentVote: (commentId, vote) => {
       dispatch(actions.commentVote(commentId, vote));
-    }
+    },
+    fetchUsers: () => {
+      dispatch(actions.fetchUsers());
+    },
   };
 }
 
@@ -102,6 +110,7 @@ function mapStateToProps(state) {
   return {
     article: state.article,
     comments: state.comments,
+    users: state.users,
   };
 }
 
@@ -114,6 +123,7 @@ Article.propTypes = {
   addComment: PropTypes.func.isRequired,
   articleVote: PropTypes.func.isRequired,
   commentVote: PropTypes.func.isRequired,
+  users: PropTypes.object.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Article);

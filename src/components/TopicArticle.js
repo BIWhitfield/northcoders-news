@@ -6,6 +6,9 @@ const TopicArticle = props => (
   <div className="box">
     <article className="media">
       <span className="column is-narrow rows">
+        <div>
+          <img src={props.avatarUrl} alt="User Avatar" />
+        </div>
         <a className="is-danger is-small" onClick={props.voteOnTopicArticles.bind(null, props.id, 'up')} >
           <i className="fa fa-arrow-up row" />
         </a>

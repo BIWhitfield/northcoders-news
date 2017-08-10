@@ -1,6 +1,12 @@
 import * as types from '../actions/types';
 import INITIAL_STATE from './INITIAL_STATE';
 
+const usernameToObj = (users) => {
+  return users.reduce((res, user) => {
+    res[user.username] = user;
+    return res;
+  }, {});
+};
 
 function reducer(prevState = INITIAL_STATE, action) {
   if (!action) return prevState;
@@ -23,6 +29,29 @@ function reducer(prevState = INITIAL_STATE, action) {
     const newState = Object.assign({}, prevState);
     newState.error = action.data;
     newState.articles = [];
+    newState.loading = false;
+    return newState;
+  }
+
+
+  // FETCH USERS
+  if (action.type === types.FETCH_USERS_REQUEST) {
+    const newState = Object.assign({}, prevState);
+    newState.loading = true;
+    return newState;
+  }
+
+  if (action.type === types.FETCH_USERS_SUCCESS) {
+    const newState = Object.assign({}, prevState);
+    newState.users = usernameToObj(action.data);
+    newState.loading = false;
+    return newState
+  }
+
+  if (action.type === types.FETCH_USERS_ERROR) {
+    const newState = Object.assign({}, prevState);
+    newState.error = action.data;
+    newState.users = [];
     newState.loading = false;
     return newState;
   }
@@ -114,7 +143,7 @@ function reducer(prevState = INITIAL_STATE, action) {
   if (action.type === types.FETCH_ARTICLE_COMMENTS_ERROR) {
     const newState = Object.assign({}, prevState);
     newState.error = action.data;
-    newState.comments = {};
+    newState.comments = [];
     newState.loading = false;
     return newState;
   }
