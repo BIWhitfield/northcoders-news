@@ -1,4 +1,14 @@
 .title.has-text-centered {
-    font-family: 'Anton', sans-serif;
-    font-size: 1000%;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 970%;
+}
+
+.subtitle.has-text-centered {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 250%;
+}
+
+.titleImage{
+    text-align: center;
+    max-width: 100%;
 }
