@@ -180,6 +180,61 @@ function reducer(prevState = INITIAL_STATE, action) {
   }
 
 
+  // ADD VOTE TO ARTICLE IN LIST
+  if (action.type === types.VOTE_ARTICLES_REQUEST) {
+    const newState = Object.assign({}, prevState);
+    newState.loading = true;
+    return newState;
+  }
+
+  if (action.type === types.VOTE_ARTICLES_SUCCESS) {
+    const newState = Object.assign({}, prevState);
+    const newData = newState.articles.slice();
+    newData.map((article) => {
+      if (article._id === action.articleId) {
+        if (action.vote === 'up') {
+          article.votes++;
+          return article;
+        }
+        article.votes--;
+        return article;
+      }
+      return article;
+    });
+    newState.articles = newData;
+
+    return newState;
+  }
+
+
+  // ADD VOTE TO TOPIC ARTICLE IN LIST
+  if (action.type === types.VOTE_TOPIC_ARTICLE_REQUEST) {
+    const newState = Object.assign({}, prevState);
+    newState.loading = true;
+    return newState;
+  }
+
+  if (action.type === types.VOTE_TOPIC_ARTICLE_SUCCESS) {
+    const newState = Object.assign({}, prevState);
+    const newData = newState.topicArticles.slice();
+    console.log('DATAAAAAAAA', newData)
+    newData.map((topicArticle) => {
+      if (topicArticle._id === action.articleId) {
+        if (action.vote === 'up') {
+          topicArticle.votes++;
+          return topicArticle;
+        }
+        topicArticle.votes--;
+        return topicArticle;
+      }
+      return topicArticle;
+    });
+    newState.topicArticles = newData;
+
+    return newState;
+  }
+
+
   return prevState;
 }
 
