@@ -106,7 +106,7 @@ function reducer(prevState = INITIAL_STATE, action) {
 
   if (action.type === types.FETCH_ARTICLE_COMMENTS_SUCCESS) {
     const newState = Object.assign({}, prevState);
-    newState.comments = Object.assign({}, action.data);
+    newState.comments = action.data;
     newState.loading = false;
     return newState;
   }
@@ -151,6 +151,34 @@ function reducer(prevState = INITIAL_STATE, action) {
     newState.loading = false;
     return newState;
   }
+
+
+  // ADD VOTE TO COMMENT
+  if (action.type === types.VOTE_COMMENT_REQUEST) {
+    const newState = Object.assign({}, prevState);
+    newState.loading = true;
+    return newState;
+  }
+
+  if (action.type === types.VOTE_COMMENT_SUCCESS) {
+    const newState = Object.assign({}, prevState);
+    const newData = newState.comments.slice();
+    newData.map((comment) => {
+      if (comment._id === action.commentId) {
+        if (action.vote === 'up') {
+          comment.votes++;
+          return comment;
+        }
+        comment.votes--;
+        return comment;
+      }
+      return comment;
+    });
+    newState.comments = newData;
+
+    return newState;
+  }
+
 
   return prevState;
 }
