@@ -3,6 +3,7 @@ const INITIAL_STATE = {
   topicArticles: [],
   article: {},
   comments: [],
+  users: {},
   votes: null,
   topics: [],
   selectedTopic: null,
