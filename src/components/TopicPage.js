@@ -28,6 +28,7 @@ class TopicPage extends React.Component {
               title={article.title}
               votes={article.votes}
               key={article._id}
+              avatarUrl={this.props.users[article.created_by].avatar_url}
               voteOnTopicArticles={this.props.voteOnTopicArticles}
             />))}</div>
       </section>
@@ -44,6 +45,9 @@ function mapDispatchToProps(dispatch) {
     voteOnTopicArticles: (articleId, vote) => {
       dispatch(actions.voteOnTopicArticles(articleId, vote));
     },
+    fetchUsers: () => {
+      dispatch(actions.fetchUsers());
+    },
   };
 }
 
@@ -51,6 +55,7 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   return {
     TopicArticles: state.topicArticles,
+    users: state.users,
   };
 }
 
