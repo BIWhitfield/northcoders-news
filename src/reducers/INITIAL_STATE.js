@@ -2,7 +2,7 @@ const INITIAL_STATE = {
   articles: [],
   topicArticles: [],
   article: {},
-  comments: [],
+  comments: {},
   votes: null,
   topics: [],
   selectedTopic: null,
