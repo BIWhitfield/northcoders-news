@@ -5,6 +5,9 @@ const Comment = props => (
   <section className="box">
     <div className="columns">
       <div className="column is-2">
+        <div>
+          <img src={props.avatarUrl} alt="User Avatar" />
+        </div>
         <a className="is-danger is-small" onClick={props.commentVote.bind(null, props.id, 'up')} >
           <i className="fa fa-arrow-up row" />
         </a>
