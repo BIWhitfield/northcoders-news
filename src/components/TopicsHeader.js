@@ -12,24 +12,22 @@ class TopicsHeader extends React.Component {
 
   render() {
     return (
-      <div className="columns" >
-        <div className="column" />
-        <div className="column is-half">
-          <div id="TopicHeader" className="field is-grouped">
-            <NavLink className="button" to={'/'}>All</NavLink>
+      <nav className="level">
+        <div className="level-item has-text-centered">
+          <div id="TopicHeader" className="field">
+            <NavLink className="button is-light" to={'/'}>All</NavLink>
             {this.props.topicsTitles.map(topic => (
               <NavLink
-                className="button"
+                className="button is-light"
                 to={`/articles/${topic.slug}`}
                 key={topic._id}
               >
                 {topic.title}
               </NavLink>
-            ))}
+                ))}
           </div>
         </div>
-        <div className="column" />
-      </div>
+      </nav>
     );
   }
 }
