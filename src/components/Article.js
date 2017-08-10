@@ -58,11 +58,9 @@ class Article extends React.Component {
               />
               <section className="box">
                 <div id="comment">
-                  {map(this.props.comments, (comment) => {
-                    return (
-                      <Comment comment={comment} key={comment._id}/>
-                    );
-                  })}
+                  {map(this.props.comments, comment => (
+                    <Comment comment={comment} key={comment._id} />
+                    ))}
                 </div>
               </section>
             </section>
@@ -101,7 +99,8 @@ Article.propTypes = {
   article: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
   fetchArticleComments: PropTypes.func.isRequired,
-  comments: PropTypes.array.isRequired,
+  comments: PropTypes.object.isRequired,
+  addComment: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Article);
