@@ -42,7 +42,7 @@ class Article extends React.Component {
       <section className="container box">
         <div className="columns">
           <div className="column is-2">
-            <VoteButtons votes={this.props.article.votes} />
+            <VoteButtons votes={this.props.article.votes} id={this.props.article._id} handleVote={this.props.articleVote} />
           </div>
           <div className="column is-8">
             <section className="box">
@@ -58,11 +58,13 @@ class Article extends React.Component {
               />
               <section className="box">
                 <div id="comment">
-                  {map(this.props.comments, (comment) => {
-                    return (
-                      <Comment comment={comment} key={comment._id}/>
-                    );
-                  })}
+                  {map(this.props.comments, comment => (
+                    <Comment
+                      comment={comment}
+                      key={comment._id}
+                      commentVote={this.props.commentVote}
+                    />
+                    ))}
                 </div>
               </section>
             </section>
@@ -85,6 +87,9 @@ function mapDispatchToProps(dispatch) {
     addComment: (articleId, comment) => {
       dispatch(actions.addComment(articleId, comment));
     },
+    articleVote: (articleId, vote) => {
+      dispatch(actions.articleVote(articleId, vote));
+    },
   };
 }
 
@@ -101,10 +106,10 @@ Article.propTypes = {
   article: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
   fetchArticleComments: PropTypes.func.isRequired,
-  comments: PropTypes.array.isRequired,
+  comments: PropTypes.object.isRequired,
+  addComment: PropTypes.func.isRequired,
+  articleVote: PropTypes.func.isRequired,
+  commentVote: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Article);
-
-
-//  <ArticleComments id={this.props.match.params.article_id} />

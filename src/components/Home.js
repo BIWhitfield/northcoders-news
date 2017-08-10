@@ -15,8 +15,14 @@ class Home extends React.Component {
       <section className="container box">
         <div id="Home">
           {this.props.articles.sort((a, b) => b.votes - a.votes)
-          .map(article => <ArticleCard article={article} id={article._id} title={article.title} votes={article.votes} key={article.title} />)}
-        </div>
+            .map(article => (
+              <ArticleCard
+                article={article}
+                id={article._id}
+                title={article.title}
+                votes={article.votes}
+                key={article._id}
+              />))}</div>
       </section>
     );
   }
@@ -41,6 +47,7 @@ function mapStateToProps(state) {
 Home.propTypes = {
   fetchArticles: PropTypes.func.isRequired,
   articles: PropTypes.array.isRequired,
+  articleVote: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

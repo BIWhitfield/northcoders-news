@@ -6,6 +6,7 @@ import * as fetchAllTopicArticles from './fetchAllTopicArticles';
 import * as fetchIndividualArticle from './fetchArticle';
 import * as userAddComment from './userAddComment';
 import * as articleComments from './articleComments';
+import * as articleVoteAction from './articleVote';
 
 
 // FETCH ALL ARTICLES
@@ -52,6 +53,7 @@ export function fetchTopicArticles(topicId) {
   };
 }
 
+
 // FETCH ARTICLE
 export function fetchArticle(articleId) {
   return (dispatch) => {
@@ -65,6 +67,7 @@ export function fetchArticle(articleId) {
       });
   };
 }
+
 
 // FETCH ARTICLE COMMENTS
 export function fetchArticleComments(articleId) {
@@ -91,6 +94,22 @@ export function addComment(articleId, comment) {
       })
       .catch((err) => {
         dispatch(userAddComment.addCommentError(err));
+      });
+  };
+}
+
+
+// VOTE ARTICLE
+export function articleVote(articleId, vote) {
+  return (dispatch) => {
+    dispatch(articleVoteAction.articleVoteRequest());
+    axios
+      .put(`${ROOT}/articles/${articleId}?vote=${vote}`)
+      .then((res) => {
+        dispatch(articleVoteAction.articleVoteSuccess(res.data));
+      })
+      .catch((error) => {
+        dispatch(articleVoteAction.articleVoteError(error));
       });
   };
 }

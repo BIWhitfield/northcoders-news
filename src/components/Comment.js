@@ -1,12 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import VoteButtons from './VoteButtons';
 
 const Comment = props => (
   <section className="box">
     <div className="columns">
       <div className="column is-2">
-        <VoteButtons votes={props.comment.votes} />
+        <a className="is-danger is-small" >
+          <i className="fa fa-arrow-up row" />
+        </a>
+        <span className="row tag is-medium bold">{props.comment.votes}</span>
+        <a className="is-danger is-small" >
+          <i className="fa fa-arrow-down row" />
+        </a>
       </div>
       <div className="column is-8">
         <section className="">
@@ -19,6 +24,8 @@ const Comment = props => (
 
 Comment.propTypes = {
   comment: PropTypes.object.isRequired,
+  votes: PropTypes.number,
+
 };
 
 export default Comment;
