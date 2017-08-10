@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { map } from 'underscore';
 import PropTypes from 'prop-types';
 import * as actions from '../actions/actions';
 
 import VoteButtons from './VoteButtons';
 import PostCommentForm from './PostCommentForm';
-import ArticleComments from './ArticleComments';
+import Comment from './Comment';
 
 class Article extends React.Component {
   constructor(props) {
@@ -19,11 +20,12 @@ class Article extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchArticle(this.props.match.params.article_id);
+    const articleId = this.props.match.params.article_id;
+    this.props.fetchArticle(articleId);
+    this.props.fetchArticleComments(articleId);
   }
 
   inputHandler(e) {
-    console.log('HELLO', e.target.value);
     this.setState({
       commentTextInput: e.target.value,
     });
@@ -54,7 +56,15 @@ class Article extends React.Component {
                 submitHandler={this.submitHandler}
                 input={this.state.commentTextInput}
               />
-              <ArticleComments id={this.props.match.params.article_id} />
+              <section className="box">
+                <div id="comment">
+                  {map(this.props.comments, (comment) => {
+                    return (
+                      <Comment comment={comment} key={comment._id}/>
+                    );
+                  })}
+                </div>
+              </section>
             </section>
           </div>
         </div>
@@ -69,6 +79,9 @@ function mapDispatchToProps(dispatch) {
     fetchArticle: (id) => {
       dispatch(actions.fetchArticle(id));
     },
+    fetchArticleComments: (id) => {
+      dispatch(actions.fetchArticleComments(id));
+    },
     addComment: (articleId, comment) => {
       dispatch(actions.addComment(articleId, comment));
     },
@@ -79,6 +92,7 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   return {
     article: state.article,
+    comments: state.comments,
   };
 }
 
@@ -86,6 +100,11 @@ Article.propTypes = {
   fetchArticle: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
+  fetchArticleComments: PropTypes.func.isRequired,
+  comments: PropTypes.array.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Article);
+
+
+//  <ArticleComments id={this.props.match.params.article_id} />
