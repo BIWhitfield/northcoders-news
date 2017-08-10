@@ -22,6 +22,7 @@ class Home extends React.Component {
                 title={article.title}
                 votes={article.votes}
                 key={article._id}
+                voteOnArticles={this.props.voteOnArticles}
               />))}</div>
       </section>
     );
@@ -33,6 +34,9 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchArticles: () => {
       dispatch(actions.fetchArticles());
+    },
+    voteOnArticles: (articleId, vote) => {
+      dispatch(actions.voteOnArticles(articleId, vote))
     },
   };
 }
@@ -47,7 +51,7 @@ function mapStateToProps(state) {
 Home.propTypes = {
   fetchArticles: PropTypes.func.isRequired,
   articles: PropTypes.array.isRequired,
-  articleVote: PropTypes.func.isRequired,
+  voteOnArticles: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

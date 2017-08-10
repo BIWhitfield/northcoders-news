@@ -8,6 +8,8 @@ import * as userAddComment from './userAddComment';
 import * as articleComments from './articleComments';
 import * as articleVoteAction from './articleVote';
 import * as voteOnComment from './voteComment';
+import * as articlesVote from './articlesVote';
+import * as topicArticlesVote from './topicArticlesVote';
 
 
 // FETCH ALL ARTICLES
@@ -111,6 +113,38 @@ export function articleVote(articleId, vote) {
       })
       .catch((error) => {
         dispatch(articleVoteAction.articleVoteError(error));
+      });
+  };
+}
+
+
+// VOTE ON ARTICLES
+export function voteOnArticles(articleId, vote) {
+  return (dispatch) => {
+    dispatch(articlesVote.voteOnArticlesRequest());
+    axios
+      .put(`${ROOT}/articles/${articleId}?vote=${vote}`)
+      .then((res) => {
+        dispatch(articlesVote.voteOnArticlesSuccess(articleId, vote));
+      })
+      .catch((error) => {
+        dispatch(articlesVote.voteOnArticlesError(error));
+      });
+  };
+}
+
+
+// VOTE ON TOPIC ARTICLES
+export function voteOnTopicArticles(articleId, vote) {
+  return (dispatch) => {
+    dispatch(topicArticlesVote.voteOnTopicArticlesRequest());
+    axios
+      .put(`${ROOT}/articles/${articleId}?vote=${vote}`)
+      .then((res) => {
+        dispatch(topicArticlesVote.voteOnTopicArticlesSuccess(articleId, vote));
+      })
+      .catch((error) => {
+        dispatch(topicArticlesVote.voteOnTopicArticlesError(error));
       });
   };
 }
