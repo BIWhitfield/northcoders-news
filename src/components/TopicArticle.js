@@ -33,6 +33,8 @@ TopicArticle.propTypes = {
   votes: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
   article: PropTypes.object.isRequired,
+  avatarUrl: PropTypes.string.isRequired,
+  voteOnTopicArticles: PropTypes.func.isRequired,
 };
 
 export default TopicArticle;
