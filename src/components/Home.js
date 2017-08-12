@@ -38,7 +38,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(actions.fetchArticles());
     },
     voteOnArticles: (articleId, vote) => {
-      dispatch(actions.voteOnArticles(articleId, vote))
+      dispatch(actions.voteOnArticles(articleId, vote));
     },
     fetchUsers: () => {
       dispatch(actions.fetchUsers());
