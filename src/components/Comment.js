@@ -80,7 +80,6 @@ Comment.propTypes = {
   comment: PropTypes.object.isRequired,
   avatarUrl: PropTypes.string.isRequired,
   commentVote: PropTypes.func.isRequired,
-
 };
 
 
