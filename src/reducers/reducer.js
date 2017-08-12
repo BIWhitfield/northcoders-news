@@ -1,12 +1,10 @@
 import * as types from '../actions/types';
 import INITIAL_STATE from './INITIAL_STATE';
 
-const usernameToObj = (users) => {
-  return users.reduce((res, user) => {
+const usernameToObj = (users) => users.reduce((res, user) => {
     res[user.username] = user;
     return res;
   }, {});
-};
 
 function reducer(prevState = INITIAL_STATE, action) {
   if (!action) return prevState;
@@ -45,7 +43,7 @@ function reducer(prevState = INITIAL_STATE, action) {
     const newState = Object.assign({}, prevState);
     newState.users = usernameToObj(action.data);
     newState.loading = false;
-    return newState
+    return newState;
   }
 
   if (action.type === types.FETCH_USERS_ERROR) {
@@ -165,6 +163,13 @@ function reducer(prevState = INITIAL_STATE, action) {
     return newState;
   }
 
+  if (action.type === types.ADD_COMMENT_ERROR) {
+    const newState = Object.assign({}, prevState);
+    newState.error = action.data;
+    newState.loading = false;
+    return newState;
+  }
+
 
   // ADD VOTE TO ARTICLE
   if (action.type === types.VOTE_ARTICLE_REQUEST) {
@@ -177,6 +182,13 @@ function reducer(prevState = INITIAL_STATE, action) {
     const newState = Object.assign({}, prevState);
     const newArticle = Object.assign({}, action.data);
     newState.article = newArticle;
+    newState.loading = false;
+    return newState;
+  }
+
+  if (action.type === types.VOTE_ARTICLE_ERROR) {
+    const newState = Object.assign({}, prevState);
+    newState.error = action.data;
     newState.loading = false;
     return newState;
   }
@@ -208,6 +220,13 @@ function reducer(prevState = INITIAL_STATE, action) {
     return newState;
   }
 
+  if (action.type === types.VOTE_COMMENT_ERROR) {
+    const newState = Object.assign({}, prevState);
+    newState.error = action.data;
+    newState.loading = false;
+    return newState;
+  }
+
 
   // ADD VOTE TO ARTICLE IN LIST
   if (action.type === types.VOTE_ARTICLES_REQUEST) {
@@ -235,6 +254,13 @@ function reducer(prevState = INITIAL_STATE, action) {
     return newState;
   }
 
+  if (action.type === types.VOTE_ARTICLES_ERROR) {
+    const newState = Object.assign({}, prevState);
+    newState.error = action.data;
+    newState.loading = false;
+    return newState;
+  }
+
 
   // ADD VOTE TO TOPIC ARTICLE IN LIST
   if (action.type === types.VOTE_TOPIC_ARTICLE_REQUEST) {
@@ -246,7 +272,7 @@ function reducer(prevState = INITIAL_STATE, action) {
   if (action.type === types.VOTE_TOPIC_ARTICLE_SUCCESS) {
     const newState = Object.assign({}, prevState);
     const newData = newState.topicArticles.slice();
-    console.log('DATAAAAAAAA', newData)
+
     newData.map((topicArticle) => {
       if (topicArticle._id === action.articleId) {
         if (action.vote === 'up') {
@@ -260,6 +286,36 @@ function reducer(prevState = INITIAL_STATE, action) {
     });
     newState.topicArticles = newData;
 
+    return newState;
+  }
+
+  if (action.type === types.VOTE_TOPIC_ARTICLE_ERROR) {
+    const newState = Object.assign({}, prevState);
+    newState.error = action.data;
+    newState.loading = false;
+    return newState;
+  }
+
+
+  // DELETE COMMENT REDUCER
+  if (action.type === types.DELETE_USER_COMMENT_REQUEST) {
+    const newState = Object.assign({}, prevState);
+    newState.loading = true;
+    return newState;
+  }
+
+  if (action.type === types.DELETE_USER_COMMENT_SUCCESS) {
+    const newState = Object.assign({}, prevState);
+    console.log(action.commentId)
+    newState.comments = prevState.comments.filter(comment => comment._id !== action.commentId);
+    return newState;
+  }
+
+  if (action.type === types.DELETE_USER_COMMENT_ERROR) {
+    const newState = Object.assign({}, prevState);
+    newState.error = action.data;
+    newState.comments = [];
+    newState.loading = false;
     return newState;
   }
 

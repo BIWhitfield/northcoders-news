@@ -8,7 +8,7 @@ class Home extends React.Component {
 
   componentDidMount() {
     this.props.fetchArticles();
-    this.props.fetchUsers()
+    this.props.fetchUsers();
   }
 
   render() {
@@ -59,6 +59,7 @@ Home.propTypes = {
   articles: PropTypes.array.isRequired,
   voteOnArticles: PropTypes.func.isRequired,
   users: PropTypes.object.isRequired,
+  fetchUsers: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
