@@ -14,13 +14,13 @@ If you do not have the correct version of node you can get the latest version fr
 
 Follow the steps below to get set up with the project on your local machine.
 
-`git clone https://github.com/BIWhitfield/northcoders-news.git
+`git clone https://github.com/BIWhitfield/northcoders-news.git`
 
-cd northcoders-news
+`cd northcoders-news`
 
-npm i
+`npm i`
 
-npm start`
+`npm start`
 
 Once webpack has finished compiling the project should open a browser window or it can be found on http://localhost:3000/
 
