@@ -63,6 +63,8 @@ TopicPage.propTypes = {
   fetchTopicArticles: PropTypes.func.isRequired,
   TopicArticles: PropTypes.array.isRequired,
   match: PropTypes.object.isRequired,
+  users: PropTypes.object.isRequired,
+  voteOnTopicArticles: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopicPage);
