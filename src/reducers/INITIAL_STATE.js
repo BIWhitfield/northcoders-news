@@ -4,7 +4,6 @@ const INITIAL_STATE = {
   article: {},
   comments: [],
   users: {},
-  votes: null,
   topics: [],
   selectedTopic: null,
   loading: false,
