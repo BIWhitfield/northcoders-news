@@ -16,7 +16,6 @@ class Comment extends React.Component {
   }
 
   setModalOverlay() {
-    console.log('MODALLLLLL');
     return this.setState({ modalOverlay: true });
   }
 
@@ -33,14 +32,12 @@ class Comment extends React.Component {
   }
 
   toggleModal() {
-    console.log('TOGGGGGGLEEEEE')
     this.setState({
       modalOverlay: false,
     });
   }
 
   render() {
-    console.log(this.state.modalOverlay);
     return (
       <section className="box">
         <div className="columns">
@@ -73,7 +70,7 @@ class Comment extends React.Component {
           </div>
         </div>
 
-        <UnauthorisedUserModal modalOverlay={this.state.modalOverlay} onClose={this.toggleModal}/>
+        <UnauthorisedUserModal modalOverlay={this.state.modalOverlay} onClose={this.toggleModal} />
       </section>
     );
   }
@@ -81,8 +78,8 @@ class Comment extends React.Component {
 
 Comment.propTypes = {
   comment: PropTypes.object.isRequired,
-  votes: PropTypes.number,
   avatarUrl: PropTypes.string.isRequired,
+  commentVote: PropTypes.func.isRequired,
 
 };
 
