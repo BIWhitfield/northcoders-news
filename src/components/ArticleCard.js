@@ -4,8 +4,8 @@ import { NavLink } from 'react-router-dom';
 
 const ArticleCard = props => (
   <div className="box">
-    <article className="media">
-      <span className="column is-narrow rows">
+    <article className="columns">
+      <span className="column is-2">
         <div>
           <img src={props.avatarUrl} alt="User Avatar" />
         </div>
