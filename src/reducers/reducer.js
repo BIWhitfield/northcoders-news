@@ -1,10 +1,10 @@
 import * as types from '../actions/types';
 import INITIAL_STATE from './INITIAL_STATE';
 
-const usernameToObj = (users) => users.reduce((res, user) => {
-    res[user.username] = user;
-    return res;
-  }, {});
+const usernameToObj = users => users.reduce((res, user) => {
+  res[user.username] = user;
+  return res;
+}, {});
 
 function reducer(prevState = INITIAL_STATE, action) {
   if (!action) return prevState;
@@ -123,6 +123,7 @@ function reducer(prevState = INITIAL_STATE, action) {
     return newState;
   }
 
+  const sortComments = data => data.sort((a, b) => b.votes - a.votes);
 
   // FETCH ARTICLE COMMENTS
   if (action.type === types.FETCH_ARTICLE_COMMENTS_REQUEST) {
@@ -133,7 +134,7 @@ function reducer(prevState = INITIAL_STATE, action) {
 
   if (action.type === types.FETCH_ARTICLE_COMMENTS_SUCCESS) {
     const newState = Object.assign({}, prevState);
-    newState.comments = action.data;
+    newState.comments = sortComments(action.data);
     newState.loading = false;
     return newState;
   }
@@ -204,7 +205,8 @@ function reducer(prevState = INITIAL_STATE, action) {
   if (action.type === types.VOTE_COMMENT_SUCCESS) {
     const newState = Object.assign({}, prevState);
     const newData = newState.comments.slice();
-    newData.map((comment) => {
+    const newDataSort = sortComments(newData);
+    newDataSort.map((comment) => {
       if (comment._id === action.commentId) {
         if (action.vote === 'up') {
           comment.votes++;
@@ -215,7 +217,7 @@ function reducer(prevState = INITIAL_STATE, action) {
       }
       return comment;
     });
-    newState.comments = newData;
+    newState.comments = newDataSort;
 
     return newState;
   }
@@ -306,7 +308,7 @@ function reducer(prevState = INITIAL_STATE, action) {
 
   if (action.type === types.DELETE_USER_COMMENT_SUCCESS) {
     const newState = Object.assign({}, prevState);
-    console.log(action.commentId)
+    console.log(action.commentId);
     newState.comments = prevState.comments.filter(comment => comment._id !== action.commentId);
     return newState;
   }
