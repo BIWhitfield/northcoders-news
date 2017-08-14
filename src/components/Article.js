@@ -74,7 +74,7 @@ class Article extends React.Component {
                       commentVote={this.props.commentVote}
                       deleteComment={this.props.deleteComment}
                     />
-                    ))}
+                  ))}
                 </div>
               </section>
             </section>
