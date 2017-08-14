@@ -1,0 +1,16 @@
+.voteSection{
+  display: inline-flex;
+  align-items: flex-end;
+
+}
+
+.tag.is-medium.bold {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.trashButtonSection {
+  margin-top: 15px;
+}
