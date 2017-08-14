@@ -1,6 +1,8 @@
 # Northcoders News
 Northcoders News is a social news aggregation, web content rating, and discussion website. It is similar to Reddit. You can interact with the site, filter the articles by topics at the top, leave a comment, vote on articles/comments and delete your comments at will. You can try and delete other users comments, but it won't let you! Your username is ``northcoder``.
 
+You can view the deployed app <a href="https://nc-n.herokuapp.com/">here</a>
+
 This repo contains all front end code for the project. The repo accesses an api that is available <a href="https://northcoders-news-api.herokuapp.com/api/">here</a>
 
 
