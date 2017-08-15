@@ -10,7 +10,7 @@ import Comment from './Comment';
 
 import '../css/Article.css';
 
-class Article extends React.Component {
+export class Article extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -120,6 +120,38 @@ function mapStateToProps(state) {
     users: state.users,
   };
 }
+
+Article.defaultProps = {
+  fetchArticle: () => ({
+    value: 'default value',
+  }),
+  fetchArticleComments: () => ({
+    value: 'default value',
+  }),
+  addComment: () => ({
+    value: 'default value',
+  }),
+  articleVote: () => ({
+    value: 'default value',
+  }),
+  commentVote: () => ({
+    value: 'default value',
+  }),
+  fetchUsers: () => ({
+    value: 'default value',
+  }),
+  deleteComment: () => ({
+    value: 'default value',
+  }),
+  handleVote: () => ({
+    value: 'default value',
+  }),
+  article: {},
+  votes: null,
+  match: {},
+  comments: [],
+  users: {},
+};
 
 Article.propTypes = {
   fetchArticle: PropTypes.func.isRequired,
