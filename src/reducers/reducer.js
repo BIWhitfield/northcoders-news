@@ -218,6 +218,7 @@ function reducer(prevState = INITIAL_STATE, action) {
       return comment;
     });
     newState.comments = newDataSort;
+    newState.loading = false;
 
     return newState;
   }
@@ -252,6 +253,7 @@ function reducer(prevState = INITIAL_STATE, action) {
       return article;
     });
     newState.articles = newData;
+    newState.loading = false;
 
     return newState;
   }
@@ -308,7 +310,7 @@ function reducer(prevState = INITIAL_STATE, action) {
 
   if (action.type === types.DELETE_USER_COMMENT_SUCCESS) {
     const newState = Object.assign({}, prevState);
-    console.log(action.commentId);
+    newState.loading = false;
     newState.comments = prevState.comments.filter(comment => comment._id !== action.commentId);
     return newState;
   }
