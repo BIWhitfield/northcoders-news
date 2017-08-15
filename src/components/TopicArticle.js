@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import '../css/TopicArticle.css';
 
-const TopicArticle = props => (
+export const TopicArticle = props => (
   <div className="box">
     <article className="columns">
       <span className="column is-2">
@@ -30,6 +30,17 @@ const TopicArticle = props => (
     </article>
   </div>
 );
+
+TopicArticle.defaultProps = {
+  avatarUrl: '',
+  title: '',
+  votes: 0,
+  id: '',
+  article: {},
+  voteOnTopicArticles: () => ({
+    value: 'default value',
+  }),
+};
 
 TopicArticle.propTypes = {
   title: PropTypes.string.isRequired,
