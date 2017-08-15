@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../css/PostCommentForm.css';
 
-const PostCommentForm = props => (
+export const PostCommentForm = props => (
   <div>
     <form className="media-content" onSubmit={props.submitHandler}>
       <textarea
@@ -21,6 +21,16 @@ const PostCommentForm = props => (
     </form>
   </div>
     );
+
+PostCommentForm.defaultProps = {
+  submitHandler: () => ({
+    value: 'default value',
+  }),
+  inputHandler: () => ({
+    value: 'default value',
+  }),
+  input: '',
+};
 
 PostCommentForm.propTypes = {
   submitHandler: PropTypes.func.isRequired,

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import UnauthorisedUserModal from './UnauthorisedUserModal';
 import '../css/Comment.css';
 
-class Comment extends React.Component {
+export class Comment extends React.Component {
   constructor(props) {
     super(props);
 
@@ -75,6 +75,14 @@ class Comment extends React.Component {
     );
   }
 }
+
+Comment.defaultProps = {
+  comment: {},
+  avatarUrl: '',
+  commentVote: () => ({
+    value: 'default value',
+  }),
+};
 
 Comment.propTypes = {
   comment: PropTypes.object.isRequired,

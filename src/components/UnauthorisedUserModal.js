@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const UnauthorisedUserModal = (props) => {
+export const UnauthorisedUserModal = (props) => {
   if (!props.modalOverlay) {
     return null;
   }
@@ -21,6 +21,12 @@ const UnauthorisedUserModal = (props) => {
   );
 };
 
+UnauthorisedUserModal.defaultProps = {
+  modalOverlay: false,
+  onClose: () => ({
+    value: 'default value',
+  }),
+};
 
 UnauthorisedUserModal.propTypes = {
   modalOverlay: PropTypes.bool.isRequired,

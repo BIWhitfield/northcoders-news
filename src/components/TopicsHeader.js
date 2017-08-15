@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import * as actions from '../actions/actions';
 
 
-class TopicsHeader extends React.Component {
+export class TopicsHeader extends React.Component {
   componentDidMount() {
     this.props.fetchTopicTitles();
   }
@@ -24,7 +24,7 @@ class TopicsHeader extends React.Component {
               >
                 {topic.title}
               </NavLink>
-                ))}
+            ))}
           </div>
         </div>
       </nav>
@@ -47,6 +47,12 @@ function mapStateToProps(state) {
   };
 }
 
+TopicsHeader.defaultProps = {
+  topicsTitles: [],
+  fetchTopicTitles: () => ({
+    value: 'default value',
+  }),
+};
 
 TopicsHeader.propTypes = {
   topicsTitles: PropTypes.array.isRequired,

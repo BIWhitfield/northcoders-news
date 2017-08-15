@@ -17,7 +17,7 @@ import * as deleteCommentAction from './deleteCommentAction';
 export function fetchArticles() {
   return (dispatch) => {
     dispatch(fetchAllArticles.fetchArticlesRequest());
-    axios.get(`${ROOT}/articles`)
+    return axios.get(`${ROOT}/articles`)
       .then((res) => {
         dispatch(fetchAllArticles.fetchArticlesSuccess(res.data.articles));
       })
@@ -32,7 +32,7 @@ export function fetchArticles() {
 export function fetchUsers() {
   return (dispatch) => {
     dispatch(fetchAllUsers.fetchUsersRequest());
-    axios.get(`${ROOT}/users`)
+    return axios.get(`${ROOT}/users`)
       .then((res) => {
         dispatch(fetchAllUsers.fetchUsersSuccess(res.data.users));
       })
@@ -47,7 +47,7 @@ export function fetchUsers() {
 export function fetchTopicTitles() {
   return (dispatch) => {
     dispatch(fetchAllTopicTitles.fetchTopicTitlesRequest());
-    axios.get(`${ROOT}/topics/`)
+    return axios.get(`${ROOT}/topics/`)
       .then((res) => {
         dispatch(fetchAllTopicTitles.fetchTopicTitlesSuccess(res.data.topics));
       })
@@ -62,7 +62,7 @@ export function fetchTopicTitles() {
 export function fetchTopicArticles(topicId) {
   return (dispatch) => {
     dispatch(fetchAllTopicArticles.fetchTopicArticlesRequest());
-    axios.get(`${ROOT}/topics/${topicId}/articles`)
+    return axios.get(`${ROOT}/topics/${topicId}/articles`)
       .then((res) => {
         dispatch(fetchAllTopicArticles.fetchTopicArticlesSuccess(res.data.articles));
       })
@@ -77,7 +77,7 @@ export function fetchTopicArticles(topicId) {
 export function fetchArticle(articleId) {
   return (dispatch) => {
     dispatch(fetchIndividualArticle.fetchArticleRequest());
-    axios.get(`${ROOT}/articles/${articleId}`)
+    return axios.get(`${ROOT}/articles/${articleId}`)
       .then((res) => {
         dispatch(fetchIndividualArticle.fetchArticleSuccess(res.data));
       })
@@ -92,7 +92,7 @@ export function fetchArticle(articleId) {
 export function fetchArticleComments(articleId) {
   return (dispatch) => {
     dispatch(articleComments.fetchArticleCommentsRequest());
-    axios.get(`${ROOT}/articles/${articleId}/comments`)
+    return axios.get(`${ROOT}/articles/${articleId}/comments`)
       .then((res) => {
         dispatch(articleComments.fetchArticleCommentsSuccess(res.data.comments));
       })
@@ -107,7 +107,7 @@ export function fetchArticleComments(articleId) {
 export function addComment(articleId, comment) {
   return (dispatch) => {
     dispatch(userAddComment.addCommentRequest());
-    axios.post(`${ROOT}/articles/${articleId}/comments`, { comment })
+    return axios.post(`${ROOT}/articles/${articleId}/comments`, { comment })
       .then((res) => {
         dispatch(userAddComment.addCommentSuccess(res.data.comment));
       })
@@ -122,7 +122,7 @@ export function addComment(articleId, comment) {
 export function articleVote(articleId, vote) {
   return (dispatch) => {
     dispatch(articleVoteAction.articleVoteRequest());
-    axios
+    return axios
       .put(`${ROOT}/articles/${articleId}?vote=${vote}`)
       .then((res) => {
         dispatch(articleVoteAction.articleVoteSuccess(res.data));
@@ -138,9 +138,9 @@ export function articleVote(articleId, vote) {
 export function voteOnArticles(articleId, vote) {
   return (dispatch) => {
     dispatch(articlesVote.voteOnArticlesRequest());
-    axios
+    return axios
       .put(`${ROOT}/articles/${articleId}?vote=${vote}`)
-      .then((res) => {
+      .then(() => {
         dispatch(articlesVote.voteOnArticlesSuccess(articleId, vote));
       })
       .catch((error) => {
@@ -154,9 +154,9 @@ export function voteOnArticles(articleId, vote) {
 export function voteOnTopicArticles(articleId, vote) {
   return (dispatch) => {
     dispatch(topicArticlesVote.voteOnTopicArticlesRequest());
-    axios
+    return axios
       .put(`${ROOT}/articles/${articleId}?vote=${vote}`)
-      .then((res) => {
+      .then(() => {
         dispatch(topicArticlesVote.voteOnTopicArticlesSuccess(articleId, vote));
       })
       .catch((error) => {
@@ -170,7 +170,7 @@ export function voteOnTopicArticles(articleId, vote) {
 export function commentVote(commentId, vote) {
   return (dispatch) => {
     dispatch(voteOnComment.commentVoteRequest());
-    axios
+    return axios
       .put(`${ROOT}/comments/${commentId}?vote=${vote}`)
       .then(() => {
         dispatch(voteOnComment.commentVoteSuccess(commentId, vote));
@@ -186,7 +186,7 @@ export function commentVote(commentId, vote) {
 export function deleteComment(commentId) {
   return (dispatch) => {
     dispatch(deleteCommentAction.deleteCommentRequest());
-    axios
+    return axios
       .delete(`${ROOT}/comments/${commentId}`)
       .then(() => {
         dispatch(deleteCommentAction.deleteCommentSuccess(commentId));

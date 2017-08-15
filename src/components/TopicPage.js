@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import * as actions from '../actions/actions';
 import TopicArticle from './TopicArticle';
 
-class TopicPage extends React.Component {
-
+export class TopicPage extends React.Component {
   componentDidMount() {
     this.props.fetchTopicArticles(this.props.match.params.topic_slug);
   }
@@ -20,17 +19,17 @@ class TopicPage extends React.Component {
     return (
       <section className="container box">
         <div>{
-        this.props.TopicArticles.sort((a, b) => b.votes - a.votes)
-          .map(article =>
-            (<TopicArticle
-              article={article}
-              id={article._id}
-              title={article.title}
-              votes={article.votes}
-              key={article._id}
-              avatarUrl={this.props.users[article.created_by].avatar_url}
-              voteOnTopicArticles={this.props.voteOnTopicArticles}
-            />))}</div>
+          this.props.TopicArticles.sort((a, b) => b.votes - a.votes)
+            .map(article =>
+              (<TopicArticle
+                article={article}
+                id={article._id}
+                title={article.title}
+                votes={article.votes}
+                key={article._id}
+                avatarUrl={this.props.users[article.created_by].avatar_url}
+                voteOnTopicArticles={this.props.voteOnTopicArticles}
+              />))}</div>
       </section>
     );
   }
@@ -58,6 +57,18 @@ function mapStateToProps(state) {
     users: state.users,
   };
 }
+
+TopicPage.defaultProps = {
+  TopicArticles: [],
+  match: {},
+  users: {},
+  fetchTopicArticles: () => ({
+    value: 'default value',
+  }),
+  voteOnTopicArticles: () => ({
+    value: 'default value',
+  }),
+};
 
 TopicPage.propTypes = {
   fetchTopicArticles: PropTypes.func.isRequired,
