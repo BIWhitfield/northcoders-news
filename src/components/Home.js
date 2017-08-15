@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import * as actions from '../actions/actions';
 import ArticleCard from './ArticleCard';
 
-class Home extends React.Component {
+export class Home extends React.Component {
 
   componentDidMount() {
     this.props.fetchArticles();
@@ -53,6 +53,20 @@ function mapStateToProps(state) {
     users: state.users,
   };
 }
+
+Home.defaultProps = {
+  articles: [],
+  users: {},
+  fetchArticles: () => ({
+    value: 'default value',
+  }),
+  voteOnArticles: () => ({
+    value: 'default value',
+  }),
+  fetchUsers: () => ({
+    value: 'default value',
+  }),
+};
 
 Home.propTypes = {
   fetchArticles: PropTypes.func.isRequired,

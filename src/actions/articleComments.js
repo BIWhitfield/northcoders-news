@@ -1,7 +1,6 @@
 import * as types from './types';
 
 export function fetchArticleCommentsRequest() {
-  console.log('request')
   return {
     type: types.FETCH_ARTICLE_COMMENTS_REQUEST,
   };
