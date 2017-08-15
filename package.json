@@ -8,6 +8,7 @@
     "enzyme": "^2.9.1",
     "file-loader": "^0.11.2",
     "history": "^4.6.3",
+    "isomorphic-fetch": "^2.2.1",
     "nock": "^9.0.14",
     "prop-types": "^15.5.10",
     "react": "^15.2.1",
@@ -30,7 +31,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test --env=jsdom --watch --coverage",
     "eject": "react-scripts eject"
   }
 }
