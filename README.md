@@ -5,6 +5,7 @@ You can view the deployed app <a href="https://nc-n.herokuapp.com/">here</a>
 
 This repo contains all front end code for the project. The repo accesses an api that is available <a href="https://northcoders-news-api.herokuapp.com/api/">here</a>
 
+To view the code for the back end click <a href="https://github.com/BIWhitfield/northcoders-news-api">here</a>.
 
 ## Getting Started Locally
 
